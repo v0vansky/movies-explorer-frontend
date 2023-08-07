@@ -31,7 +31,6 @@ function App() {
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
-            <div className="page">
                 <Routes>
                     <Route path="/" element={
                         <Main />
@@ -58,7 +57,6 @@ function App() {
                         <Navigate to="/404" replace />
                     } />
                 </Routes>
-            </div>
         </CurrentUserContext.Provider>
     );
 }

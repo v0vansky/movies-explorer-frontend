@@ -22,7 +22,6 @@
     background-image: url("../../images/header-logo.svg");
     background-size:contain;
     background-position:top;
-    background: cover;
 }
 
 .header__menu {
@@ -95,7 +94,11 @@
 }
 
 .header__login {
-    border: none;
+    display: flex;
+    text-decoration: none;
+    justify-content: center;
+    box-sizing: border-box;
+    padding-top: 7px;
     border-radius: 3px;
     background: #3DDC84;
     width: 76px;
@@ -151,6 +154,7 @@
     }
 
     .header__login {
+        padding-top: 5px;
         width: 54px;
         height: 26px;
         font-size: 10px;

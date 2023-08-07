@@ -14,30 +14,30 @@ function Navigation() {
     return (
         <>
             <MenuButton handleClick={() => setIsOpen(true)} />
-            <div className={`navigation ${isOpen && 'open'}`} onClick={closeMenu}>
-                <nav className='navigation__menu' onClick={e => e.stopPropagation()}>
-                <div className='navigation__wrapper'>
-                    <button type='button' className='navigation__close' onClick={closeMenu}>
-                        <span className='navigation__close-icon' />
+            <div className={`header__navigation${isOpen ? ' header__navigation_open' : ''}`} onClick={closeMenu}>
+                <nav className='header__nav-menu' onClick={e => e.stopPropagation()}>
+                <div className='header__nav-wrapper'>
+                    <button type='button' className='header__nav-close' onClick={closeMenu}>
+                        <span className='header__nav-close-icon' />
                     </button>
                     <NavLink
                         to='/'
                         end
-                        className={({ isActive }) => `navigation__nav-link navigation__nav-link_type_home ${isActive && 'active'}`}
+                        className={({ isActive }) => `header__nav-link header__nav-link_type_home${isActive ? ' header__nav-link_active' : ''}`}
                         >
                         Главная
                     </NavLink>
                     <NavLink
                         to='/movies'
                         end
-                        className={({ isActive }) => `navigation__nav-link ${isActive && 'active'}`}
+                        className={({ isActive }) => `header__nav-link${isActive ? ' header__nav-link_active' : ''}`}
                         onClick={closeMenu}
                         >
                         Фильмы
                     </NavLink>
                     <NavLink
                         to='/saved-movies'
-                        className={({ isActive }) => `navigation__nav-link ${isActive && 'active'}`}
+                        className={({ isActive }) => `header__nav-link${isActive ? ' header__nav-link_active' : ''}`}
                         onClick={closeMenu}
                         >
                         Сохранённые фильмы
@@ -45,10 +45,10 @@ function Navigation() {
                 </div>
                 <NavLink
                     to='/profile'
-                    className={({ isActive }) => `navigation__nav-link ${isActive && 'active'}`}
+                    className={({ isActive }) => `header__nav-link${isActive ? ' header__nav-link_active' : ''}`}
                 >
                     Аккаунт
-                    <span className='navigation__profile' />
+                    <span className='header__nav-profile' />
                 </NavLink>
                 </nav>
             </div>

@@ -1,4 +1,4 @@
-.movies-card {
+.movies__card {
     border-radius: 6px;
     background: #222;
     box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
@@ -6,33 +6,33 @@
     min-width: fit-content;
 }
 
-.movies-card__info {
+.movies__card-info {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 18px;
 }
 
-.movies-card__title {
+.movies__card-title {
     margin: 0;
     color: #FFF;
     font-size: 15px;
     font-weight: 500;
 }
 
-.movies-card__duration {
+.movies__card-duration {
     color: #8B8B8B;
     font-size: 13px;
     margin: 0;
 }
 
-.movies-card__image {
+.movies__card-image {
     width: 100%;
     height: 200px;
     object-fit: contain;
 }
 
-.movies-card__button {
+.movies__card-button {
     position: relative;
     border: none;
     width: 100px;
@@ -50,54 +50,54 @@
     transition: 0.2s ease-out;
 }
 
-.movies-card__button:hover {
+.movies__card-button:hover {
     opacity: 0.8;
 }
 
-.movies-card__button_saved {
+.movies__card-button_type_saved {
     background-color: #EE3465;
     color: transparent;
 }
 
-.movies-card__button_type_delete {
+.movies__card-button_type_delete {
     color: transparent;
 }
 
-.movies-card__button::after {
+.movies__card-button::after {
     color: #FFF;
     position: absolute;
     top: 7px;
     left: 45px;
 }
 
-.movies-card__button_type_saved::after {
+.movies__card-button_type_saved::after {
     content: '✓';
     font-size: 14px;
 }
 
-.movies-card__button_type_delete::after {
+.movies__card-button_type_delete::after {
     content: '✕';
 }
 
 @media screen and (max-width: 850px) {
-    .movies-card__image {
+    .movies__card-image {
         height: 190px;
     }
 }
 @media screen and (max-width: 600px) {
-    .movies-card__info {
+    .movies__card-info {
         padding: 14px;
     }
-    .movies-card__title {
+    .movies__card-title {
         font-size: 12px;
     }
-    .movies-card__duration {
+    .movies__card-duration {
         font-size: 10px;
     }
-    .movies-card__image {
+    .movies__card-image {
         height: 168px;
     }
-    .movies-card__button {
+    .movies__card-button {
         margin: 14px auto;
     }
 }

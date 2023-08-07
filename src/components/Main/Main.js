@@ -14,9 +14,7 @@ function Main() {
             <Header>
                 <nav className='header__menu'>
                     <Link to="/sign-up" className="header__register">Регистрация</Link>
-                    <Link to="/sign-in">
-                        <button type="button" className="header__login">Войти</button>
-                    </Link>
+                    <Link to="/sign-in" className="header__login">Войти</Link>
                 </nav>
             </Header>
             <main>
