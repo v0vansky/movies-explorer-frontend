@@ -2,13 +2,13 @@ import './FilterCheckbox.css';
 
 function FilterCheckbox() {
   return (
-    <label className='filter-checkbox'>
-      <div className='filter-checkbox__container'>
-        <input type='checkbox' className='filter-checkbox__input' />
-        <span className='filter-checkbox__checkmark' />
+    <div className='search-form__filter-checkbox'>
+      <div className='search-form__filter-checkbox-container'>
+        <input type='checkbox' className='search-form__filter-checkbox-input' />
+        <span className='search-form__filter-checkbox-checkmark' />
       </div>
-      <p className='filter-checkbox__text'>Короткометражки</p>
-    </label>
+      <p className='search-form__filter-checkbox-text'>Короткометражки</p>
+    </div>
   );
 };
 

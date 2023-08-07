@@ -1,4 +1,4 @@
-.portfolio__title {
+.about-me__portfolio-title {
     color: #8B8B8B;
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: Inter;
@@ -9,13 +9,13 @@
     margin: 0 0 30px;
 }
 
-.portfolio__list {
+.about-me__portfolio-list {
     padding: 0;
     margin: 0;
     list-style: none;
 }
 
-.portfolio__link {
+.about-me__portfolio-link {
     color: #FFF;
     font-family: Inter;
     font-size: 30px;
@@ -30,30 +30,30 @@
     border-bottom: 1px solid #424242;
     transition: .2s ease-out;
 }
-.portfolio__link:hover {
+.about-me__portfolio-link:hover {
     opacity: 0.7;
 }
-.portfolio__link:active {
+.about-me__portfolio-link:active {
     scale: 98%;
 }
 
-.portfolio__link-container:last-of-type .portfolio__link {
+.about-me__portfolio-link-container:last-of-type .about-me__portfolio-link {
     padding-bottom: 0;
     border-bottom: none;
 }
 
 @media screen and (max-width: 950px) {
-    .portfolio__link {
+    .about-me__portfolio-link {
         font-size: 28px;
     }
 }
 @media screen and (max-width: 600px) {
-    .portfolio__title {
+    .about-me__portfolio-title {
         font-size: 14px;
         margin-bottom: 22px;
     }
 
-    .portfolio__link {
+    .about-me__portfolio-link {
         font-size: 18px;
         letter-spacing: -0.72px;
         padding: 8px 0;

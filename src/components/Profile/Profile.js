@@ -28,7 +28,7 @@ function Profile(props) {
                     </div>
                 </div>
                 <button type="button" className="profile__edit-button" onClick={props.onEditProfile}>Редактировать</button>
-                <Link to="/"><button type="button" className="profile__logout-button" onClick={props.onLogout}>Выйти из аккаунта</button></Link>
+                <Link to="/" className="profile__logout-button" onClick={props.onLogout}>Выйти из аккаунта</Link>
             </main>
         </>
     )

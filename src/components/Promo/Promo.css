@@ -55,6 +55,11 @@
 }
 
 .promo__button {
+    display: flex;
+    text-decoration: none;
+    justify-content: center;
+    box-sizing: border-box;
+    padding-top: 8px;
     background-color:unset;
     color: #FFF;
     font-family: Inter;
