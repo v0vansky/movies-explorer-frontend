@@ -2,6 +2,8 @@
     border-radius: 6px;
     background: #222;
     box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+    height: fit-content;
+    min-width: fit-content;
 }
 
 .movies-card__info {
@@ -45,7 +47,7 @@
     margin: 15px auto;
     cursor: pointer;
     display: block;
-    transition: all 0.3s;
+    transition: 0.2s ease-out;
 }
 
 .movies-card__button:hover {
@@ -57,7 +59,7 @@
     color: transparent;
 }
 
-.movies-card__button_delete {
+.movies-card__button_type_delete {
     color: transparent;
 }
 
@@ -68,12 +70,12 @@
     left: 45px;
 }
 
-.movies-card__button_saved::after {
+.movies-card__button_type_saved::after {
     content: '✓';
     font-size: 14px;
 }
 
-.movies-card__button_delete::after {
+.movies-card__button_type_delete::after {
     content: '✕';
 }
 
