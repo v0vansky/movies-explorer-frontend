@@ -26,7 +26,7 @@
     border-color: #4285F4;
 }
 
-.search-form__button {
+.search-form__submit-button {
     width: 108px;
     height: 52px;
     border-radius: 5px;
@@ -40,7 +40,7 @@
     transition: all 0.3s;
 }
 
-.search-form__button:hover {
+.search-form__submit-button:hover {
     opacity: 0.8;
 }
 
@@ -65,7 +65,7 @@
     .search-form__label {
         padding: 0 9px 0 0;
     }
-    .search-form__button {
+    .search-form__submit-button {
         width: 114px;
     }
 }
@@ -81,7 +81,7 @@
         padding-right: 5px;
         height: 56px;
     }
-    .search-form__button {
+    .search-form__submit-button {
         width: 107px;
         height: 44px;
     }

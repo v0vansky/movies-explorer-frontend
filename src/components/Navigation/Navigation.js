@@ -23,7 +23,7 @@ function Navigation() {
                     <NavLink
                         to='/'
                         end
-                        className={({ isActive }) => `navigation__nav-link navigation__nav-link_home ${isActive && 'active'}`}
+                        className={({ isActive }) => `navigation__nav-link navigation__nav-link_type_home ${isActive && 'active'}`}
                         >
                         Главная
                     </NavLink>

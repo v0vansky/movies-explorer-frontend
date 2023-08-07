@@ -17,11 +17,11 @@ const MoviesCard = ({ name, duration, image, saved, savedPage }) => {
       {savedPage? (
         <button
           type='button'
-          className='movies-card__button movies-card__button_delete'/>
+          className='movies-card__button movies-card__button_type_delete'/>
       ):(
         <button
           type='button'
-          className={`movies-card__button ${savedMovie && 'movies-card__button_saved'}`}
+          className={`movies-card__button ${savedMovie && 'movies-card__button_type_saved'}`}
           onClick={() => setSavedMovie(!savedMovie)}
         >
           Сохранить

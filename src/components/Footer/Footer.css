@@ -1,6 +1,13 @@
 .footer {
-    margin: 79px 70px 0;
+    padding: 78px 0 0;
+    width: 100%;
+}
+.footer__content {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
     box-sizing: border-box;
+    padding: 0 30px;
 }
 
 .footer__title {
@@ -52,16 +59,12 @@
     scale: 94%;
 }
 
-@media (max-width: 950px) {
-    .footer {
-        margin: 77px 30px 0;
-    }
-}
-
 @media (max-width: 600px) {
     .footer {
-        margin: 60px 10px 0;
-
+        padding: 60px 0 0;
+    }
+    .footer__content {
+        padding: 0 10px;
     }
     .footer__title {
         font-size: 12px;

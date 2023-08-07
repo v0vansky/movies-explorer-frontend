@@ -15,8 +15,8 @@ function MoviesCardList({ savedPage }) {
         }
     }, [savedPage]);
     return (
-        <section className='movies-list'>
-            <ul className='movies-list__list'>
+        <section className='movies-card-list'>
+            <ul className='movies-card-list__list'>
                 {movies.map((movie, index) => (
                     <MoviesCard
                         key={index}
@@ -29,7 +29,7 @@ function MoviesCardList({ savedPage }) {
                 ))}
             </ul>
             {!savedPage && (
-                <button type='button' className='movies-list__button'>Ещё</button>
+                <button type='button' className='movies-card-list__button'>Ещё</button>
             )}
         </section>
     );

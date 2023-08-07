@@ -1,6 +1,7 @@
 .header {
+    max-width: 1200px;
     width: 100%;
-    padding: 18px 0;
+    padding: 18px 30px;
     gap: 30px;
     display: flex;
     flex-direction: row;
@@ -8,13 +9,14 @@
     position: absolute;
     box-sizing: border-box;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     align-items: center;
     z-index: 2;
 }
 
 .header__logo {
-    margin: 0 70px;
+    margin: 0;
     width: 38px;
     min-height: 38px;
     background-image: url("../../images/header-logo.svg");
@@ -24,8 +26,7 @@
 }
 
 .header__menu {
-    
-    margin: 0 70px;
+    margin: 0;
     display: flex;
     justify-self: flex-end;
     align-self: center;
@@ -128,13 +129,6 @@
 }
 
 @media screen and (max-width: 850px) {
-    .header__logo {
-        margin-left: 30px;
-    }
-
-    .header__menu {
-        margin: 0 30px;
-    }
 }
 
 @media screen and (max-width: 600px) {

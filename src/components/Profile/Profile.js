@@ -1,15 +1,20 @@
 import React from "react";
 import './Profile.css';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import Header from '../Header/Header';
 import { Link } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
+import Header from '../Header/Header';
+import Navigation from '../Navigation/Navigation';
+
 
 function Profile(props) {
     const currentUser = React.useContext(CurrentUserContext);
 
     return (
         <>
-            <Header />
+            <Header>
+                <Navigation />
+            </Header>
             <main className='profile'>
                 <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
                 <div className="profile__info">

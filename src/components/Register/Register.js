@@ -16,42 +16,44 @@ function Register(props) {
         <>
             <main className='register'>
                 <div className="register__container">
-                    <div className="register__logo" />
+                    <Link to="/" className="register__logo" />
                     <h1 className='register__title'>Добро пожаловать!</h1>
                     <form className="register__form" onSubmit={handleSubmit}>
-                        <span className="register__input-span">Имя</span>
-                        <div className="register__input-container">
-                            <input
-                                className="register__input"
-                                value={name || ""}
-                                onChange={(e) => {setName(e.target.value)}}
-                                name="name"
-                                type="text"
-                                required
-                                autoComplete="off" />
-                        </div>
-                        <span className="register__input-span">E-mail</span>
-                        <div className="register__input-container">
-                            <input
-                                className="register__input"
-                                value={email || ""}
-                                onChange={(e) => {setEmail(e.target.value)}}
-                                name="email"
-                                type="email"
-                                required
-                                autoComplete="off" />
-                        </div>
-                        <span className="register__input-span">Пароль</span>
-                        <div className="register__input-container">
-                            <input
-                                className="register__input"
-                                value={password || ""}
-                                onChange={(e) => {setPassword(e.target.value)}}
-                                name="password"
-                                type="password"
-                                required
-                                autoComplete="off" />
-                            <span className="register__error password-input-error">Что-то пошло не так...</span>
+                        <div className="register__inputs">
+                            <span className="register__input-span">Имя</span>
+                            <div className="register__input-container">
+                                <input
+                                    className="register__input"
+                                    value={name || ""}
+                                    onChange={(e) => {setName(e.target.value)}}
+                                    name="name"
+                                    type="text"
+                                    required
+                                    autoComplete="off" />
+                            </div>
+                            <span className="register__input-span">E-mail</span>
+                            <div className="register__input-container">
+                                <input
+                                    className="register__input"
+                                    value={email || ""}
+                                    onChange={(e) => {setEmail(e.target.value)}}
+                                    name="email"
+                                    type="email"
+                                    required
+                                    autoComplete="off" />
+                            </div>
+                            <span className="register__input-span">Пароль</span>
+                            <div className="register__input-container">
+                                <input
+                                    className="register__input"
+                                    value={password || ""}
+                                    onChange={(e) => {setPassword(e.target.value)}}
+                                    name="password"
+                                    type="password"
+                                    required
+                                    autoComplete="off" />
+                                <span className="register__error register__error_type_password-input-error">Что-то пошло не так...</span>
+                            </div>
                         </div>
                         <button className="register__submit-button" type="submit" >Зарегистрироваться</button>
                     </form>

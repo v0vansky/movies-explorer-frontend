@@ -10,7 +10,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
     height: 100%;
+    padding-bottom: 54px;
 }
 
 .register__logo {
@@ -42,11 +44,20 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 54.5%;
+    height: 100%;
+}
+
+.register__inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-bottom: 65px;
+    box-sizing: border-box;
+    max-height: 266px;
+    height: 100%;
 }
 
 .register__input-span {
-    margin-bottom: 5px;
     color: #8B8B8B;
     font-family: Inter;
     font-size: 10px;
@@ -85,7 +96,7 @@
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 24px;
-    padding: 0 0 8px;
+    padding: 5px 0 8px;
     background: transparent;
     border: none;
     border-bottom: 1px solid #424242;
@@ -95,14 +106,16 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    transition: .2s ease-out;
 }
 .register__input:focus {
     outline: none;
+    background: #3f3f3f;
+    border-radius: 3px;
 }
 
 .register__submit-button {
     margin-top: auto;
-    box-sizing: border-box;
     padding: 14px;
     border-radius: 3px;
     background: #4285F4;
@@ -142,18 +155,20 @@
 
 @media screen and (max-width: 800px) {
     .register__container {
-        padding-top: 162px;
-        padding-bottom: 162px;
+        max-height: 700px;
+        height: 100%;
+        margin: 162px auto;
+        width: 100%;
     }
 }
 
 @media screen and (max-width: 500px) {
     .register__container {
         padding: 0 30px;
+        margin: 0 auto;
+        max-height: 100%;
     }
-    .register__form {
-        height: 60%;
-    }
+
     .register__logo {
         align-self: center;
         margin-top: 56px;
@@ -171,6 +186,6 @@
 
     .register__link-text {
         font-size: 12px;
-        margin-top: 14px;
+        margin: 14px 0 30px;
     }
 }

@@ -1,4 +1,4 @@
-.notfound {
+.not-found {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,7 +6,7 @@
     height: 100vh;
 }
 
-.notfound__container{
+.not-found__container{
     display: flex;
     position: relative;
     flex-direction: column;
@@ -15,7 +15,7 @@
     padding-bottom: 18px;
 }
 
-.notfound__number {
+.not-found__number {
     display: flex;
     max-width: 400px;
     margin: 0;
@@ -27,7 +27,7 @@
     font-weight: 400;
     line-height: normal;
 }
-.notfound__info {
+.not-found__info {
     display: flex;
     margin: 3px 0 0;
     color: #FFF;
@@ -38,7 +38,7 @@
     font-weight: 400;
     line-height: normal;
 }
-.notfound__link {
+.not-found__link {
     display: flex;
     margin: 0;
     position: absolute;
@@ -53,33 +53,33 @@
     transition: .2s ease-out;
     bottom: -184px;
 }
-.notfound__link:hover {
+.not-found__link:hover {
     cursor: pointer;
     opacity: 0.7;
 }
-.notfound__link:active {
+.not-found__link:active {
     scale: 95%;
 }
 
 @media screen and (max-width: 400px) {
-    .notfound__number {
+    .not-found__number {
         font-size: 80px;
     }
-    .notfound__info {
+    .not-found__info {
         font-size: 12px;
         margin-top: 9px;
     }
-    .notfound__link {
+    .not-found__link {
         font-size: 12px;
         bottom: calc(100% - 54vh);
     }
-    .notfound__container{
+    .not-found__container{
         padding-bottom: 0;
     }
 }
 
 @media screen and (max-height: 600px) {
-    .notfound__link {
+    .not-found__link {
         bottom: -30px; 
     }
 

@@ -1,7 +1,12 @@
 .about-me {
     width: 100%;
+    box-sizing: border-box;
+    padding: 110px 0 125px;
+}
+
+.about-me__content {
     max-width: 1200px;
-    padding: 111px 30px 125px;
+    padding: 0 30px;
     margin: 0 auto;
     box-sizing: border-box;
 }
@@ -79,10 +84,15 @@
     scale: 90%;
 }
 
-@media (max-width: 950px) {
+@media (max-width: 990px) {
     .about-me {
-        padding: 90px 50px;
+        padding: 90px 0;
     }
+
+    .about-me__content {
+        padding: 0 50px;
+    }
+
     .about-me__container {
         margin: 66px 0 89px;
     }
@@ -109,7 +119,11 @@
 
 @media screen and (max-width: 600px) {
     .about-me {
-        padding: 77px 14px;
+        padding: 77px 0;
+    }
+
+    .about-me__content {
+        padding: 0 14px;
     }
     .about-me__container {
         flex-direction: column;
