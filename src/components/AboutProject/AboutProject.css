@@ -1,0 +1,138 @@
+.project {
+    padding: 110px 70px 106px;
+}
+
+.project__info-container {
+    display: flex;
+    flex-direction: row;
+    gap: 52px;
+    margin: 70px 0;
+}
+
+.project__info {
+    display: block;
+    margin: 0;
+}
+
+.project__info-text {
+    margin: 0;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.8px;
+}
+
+.project__info-description {
+    margin: 26px 0 38px;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+}
+
+.project__timeline {
+    margin: 0;
+    display: grid;
+    grid-template: repeat(2, 36px) / 1fr 4fr;
+    place-items: center;
+}
+
+.project__timeline-time {
+    margin: 0;
+    width: 100%;
+    max-height: 100%;
+    padding: 9px 0;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: #303030;
+}
+
+.project__timeline-time:first-of-type {
+    background: #3DDC84;
+    color: #000;
+}
+
+.project__timeline-result {
+    margin: 0;
+    padding: 11px 0 0;
+    color: #8B8B8B;
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 17px; /* 121.429% */
+}
+
+@media (max-width: 950px) {
+    .project {
+        padding: 90px 50px 83px;
+    }
+
+    .project__info-container {
+        gap: 38px;
+        margin: 70px 0;
+    }
+
+    .project__info-description {
+        margin: 20px 0 24px;
+        font-size: 12px;
+        line-height: 18px; /* 150% */
+    }
+
+    .project__timeline-result {
+        margin: 0;
+        padding-top: 6px;
+    }
+
+    .project__timeline {
+        grid-template: repeat(2, 36px) / 1fr 3.78fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .project {
+        padding: 70px 18px 66px;
+    }
+
+    .project__info-container {
+        gap: 56px;
+        margin: 59px 0;
+        flex-direction: column;
+    }
+
+    .project__info-text {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+    }
+
+    .project__info-description {
+        margin: 14px 0 0;
+        font-size: 11px;
+        line-height: 16px; /* 145.455% */
+    }
+
+    .project__timeline-time {
+        font-size: 11px;
+    }
+
+    .project__timeline-result {
+        font-size: 11px;
+        margin: 0;
+        padding-top: 0;
+    }
+
+    .project__timeline {
+        grid-template: repeat(2, 35px) / 1fr 1.86fr;
+    }
+}
