@@ -1,0 +1,49 @@
+.menu-button {
+    display: none;
+}
+
+@media screen and (max-width: 850px) {
+    .menu-button {
+        display: block;
+        position: relative;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        width: 29px;
+        height: 23px;
+        margin: 3px 38px 4px 0;
+    }
+    .menu-button__icon,
+    .menu-button::after,
+    .menu-button::before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        height: 3px;
+        background-color: #FFF;
+    }
+    .menu-button__icon {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .menu-button::after {
+        top: 0;
+    }
+    .menu-button::before {
+        bottom: 0;
+    }
+    .menu-button:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .menu-button {
+        width: 21px;
+        height: 21px;
+        margin: 3px 9px 4px 0;
+    }
+}
