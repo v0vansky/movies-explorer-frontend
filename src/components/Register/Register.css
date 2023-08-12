@@ -29,7 +29,7 @@
 
 .register__title {
     align-self: start;
-    margin: 39px 0;
+    margin: 39px 0 40px;
     color: #FFF;
     text-align: center;
     font-family: Inter;
@@ -56,7 +56,7 @@
     height: 100%;
 }
 
-.register__input-span {
+.register__input-label {
     color: #8B8B8B;
     font-family: Inter;
     font-size: 10px;
@@ -95,7 +95,7 @@
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 24px;
-    padding: 5px 0 8px;
+    padding: 4px 0 9px;
     background: transparent;
     border: none;
     border-bottom: 1px solid #424242;
@@ -114,6 +114,7 @@
 }
 
 .register__submit-button {
+    border: none;
     margin-top: auto;
     padding: 14px;
     border-radius: 3px;
@@ -150,6 +151,13 @@
 .register__link {
     text-decoration: none;
     color: #4285F4;
+    transition: .1s ease-out;
+}
+.register__link:hover {
+    opacity: .7;
+}
+.register__link:active {
+    color: #FFF;
 }
 
 @media screen and (max-width: 800px) {

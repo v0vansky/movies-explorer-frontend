@@ -1,4 +1,4 @@
-class Api {
+class MainApi {
   constructor(options) {
     this._url = options.url;
   }
@@ -104,6 +104,6 @@ class Api {
   }
 }
 
-export const api = new Api({
+export const MainApi = new MainApi({
   url: "https://api.mesto.vovansky.nomoreparties.sbs",
 })
