@@ -9,7 +9,7 @@
         background-color: transparent;
         border: none;
         padding: 0;
-        width: 29px;
+        width: 28px;
         height: 23px;
         margin: 3px 8px 4px 0;
     }
@@ -29,10 +29,10 @@
         transform: translateY(-50%);
     }
     .header__menu-button::after {
-        top: 0;
+        top: 1px;
     }
     .header__menu-button::before {
-        bottom: 0;
+        bottom: -1px;
     }
     .header__menu-button:hover {
         opacity: 0.8;
@@ -42,8 +42,13 @@
 
 @media screen and (max-width: 600px) {
     .header__menu-button {
-        width: 21px;
+        width: 22px;
         height: 21px;
         margin: 3px 9px 4px 0;
+    }
+    .header__menu-button-icon,
+    .header__menu-button::after,
+    .header__menu-button::before {
+        height: 2.4px;
     }
 }

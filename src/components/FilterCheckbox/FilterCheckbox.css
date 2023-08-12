@@ -1,5 +1,4 @@
 .search-form__filter-checkbox {
-    cursor: pointer;
     margin: 26px 0 0;
     display: flex;
     align-items: center;
@@ -7,42 +6,58 @@
     transition: .2s ease-out;
 }
 
+.search-form__toggler-wrapper {
+    display: block;
+    width: 36px;
+    height: 20px;
+    cursor: pointer;
+    position: relative;
+}
+  
+.search-form__toggler-wrapper input[type="checkbox"] {
+    display: none;
+}
+  
+.search-form__toggler-wrapper input[type="checkbox"]:checked+.search-form__toggler-slider {
+    background-color: #3DDC84;
+}
+  
+.search-form__toggler-wrapper .search-form__toggler-slider {
+    background-color: #343434;
+    position: absolute;
+    border-radius: 100px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all 300ms ease;
+    transition: all 300ms ease;
+}
+  
+.search-form__toggler-wrapper .search-form__toggler-knob {
+    position: absolute;
+    -webkit-transition: all 300ms ease;
+    transition: all 300ms ease;
+    width: 8px;
+    height: 8px;
+    top: 50%;
+    left: 6px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background-color: #A0A0A0;
+}
+
+.search-form__toggler-wrapper input[type="checkbox"]:checked+.search-form__toggler-slider .search-form__toggler-knob {
+    left: calc(100% - 14px);
+    background-color: #FFF;
+}
+
+
 .search-form__filter-checkbox:hover {
     opacity: 0.8;
 }
 
-.search-form__filter-checkbox-input {
-    visibility: hidden;
-}
-
-.search-form__filter-checkbox-container {
-    width: 36px;
-    height: 20px;
-    background: #343434;
-    position: relative;
-    border-radius: 10px;
-}
-
-/* .filter-checkbox__container:has(.filter-checkbox__input:checked) {
-    background: #3DDC84;
-} */
-
-.search-form__filter-checkbox-checkmark {
-    display: block;
-    width: 8px;
-    height: 8px;
-    position: absolute;
-    top: calc(50% - 4px);
-    left: 6px;
-    background: #A0A0A0;
-    border-radius: 50px;
-    transition: .2s ease-out;
-}
-
-.search-form__filter-checkbox-input:checked~.filter-checkbox-checkmark {
-    left: 22px;
-    background-color: #fff;
-}
 
 .search-form__filter-checkbox-text {
     margin: 0;
