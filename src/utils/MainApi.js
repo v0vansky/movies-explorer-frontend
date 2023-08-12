@@ -104,6 +104,6 @@ class MainApi {
   }
 }
 
-export const MainApi = new MainApi({
+export const mainApi = new MainApi({
   url: "https://api.mesto.vovansky.nomoreparties.sbs",
 })
