@@ -20,7 +20,7 @@ function Register(props) {
                     <h1 className='register__title'>Добро пожаловать!</h1>
                     <form className="register__form" onSubmit={handleSubmit}>
                         <div className="register__inputs">
-                            <span className="register__input-span">Имя</span>
+                            <label className="register__input-label" for="name">Имя</label>
                             <div className="register__input-container">
                                 <input
                                     className="register__input"
@@ -31,7 +31,7 @@ function Register(props) {
                                     required
                                     autoComplete="off" />
                             </div>
-                            <span className="register__input-span">E-mail</span>
+                            <label className="register__input-label">E-mail</label>
                             <div className="register__input-container">
                                 <input
                                     className="register__input"
@@ -42,7 +42,7 @@ function Register(props) {
                                     required
                                     autoComplete="off" />
                             </div>
-                            <span className="register__input-span">Пароль</span>
+                            <label className="register__input-label">Пароль</label>
                             <div className="register__input-container">
                                 <input
                                     className="register__input"
