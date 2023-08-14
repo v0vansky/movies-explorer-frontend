@@ -3,13 +3,32 @@ import './Register.css';
 import { Link } from "react-router-dom";
 
 function Register(props) {
-    const [name, setName] = React.useState("");
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+    const [values, setValues] = React.useState({});
+    const [errors, setErrors] = React.useState({});
+    const [isValid, setIsValid] = React.useState(false);
+
+    const handleChange = (event) => {
+        const target = event.target;
+        const name = target.name;
+        const value = target.value;
+        setValues({...values, [name]: value});
+        setErrors({...errors, [name]: target.validationMessage });
+        setIsValid(target.closest("form").checkValidity());
+    };
+
+    const resetForm = React.useCallback(
+        (newValues = {}, newErrors = {}, newIsValid = false) => {
+            setValues(newValues);
+            setErrors(newErrors);
+            setIsValid(newIsValid);
+        },
+        [setValues, setErrors, setIsValid]
+    );
 
     const handleSubmit = (e) => {
         e.preventDefault();
-/*         props.onRegister(name, email, password); */
+        props.onRegister(values.name, values.email, values.password);
+        resetForm();
     }
 
     return (
@@ -23,39 +42,46 @@ function Register(props) {
                             <label className="register__input-label" for="name">Имя</label>
                             <div className="register__input-container">
                                 <input
-                                    className="register__input"
-                                    value={name || ""}
-                                    onChange={(e) => {setName(e.target.value)}}
+                                    className={`register__input${errors.name ? ' register__input_invalid' : ''}`}
+                                    value={values.name || ""}
+                                    onChange={handleChange}
                                     name="name"
+                                    id="name"
                                     type="text"
+                                    minLength={2}
+                                    maxLength={30}
                                     required
                                     autoComplete="off" />
+                                    <span className="register__error">{errors.name}</span>
                             </div>
-                            <label className="register__input-label">E-mail</label>
+                            <label className="register__input-label" for="email">E-mail</label>
                             <div className="register__input-container">
                                 <input
-                                    className="register__input"
-                                    value={email || ""}
-                                    onChange={(e) => {setEmail(e.target.value)}}
+                                    className={`register__input${errors.email ? ' register__input_invalid' : ''}`}
+                                    value={values.email || ""}
+                                    onChange={handleChange}
                                     name="email"
+                                    id="email"
                                     type="email"
                                     required
                                     autoComplete="off" />
+                                    <span className="register__error">{errors.email}</span>
                             </div>
-                            <label className="register__input-label">Пароль</label>
+                            <label className="register__input-label" for="password">Пароль</label>
                             <div className="register__input-container">
                                 <input
-                                    className="register__input"
-                                    value={password || ""}
-                                    onChange={(e) => {setPassword(e.target.value)}}
+                                    className={`register__input${errors.password ? ' register__input_invalid' : ''}`}
+                                    value={values.password || ""}
+                                    onChange={handleChange}
                                     name="password"
+                                    id="password"
                                     type="password"
                                     required
                                     autoComplete="off" />
-                                <span className="register__error register__error_type_password-input-error">Что-то пошло не так...</span>
+                                <span className="register__error">{errors.password}</span>
                             </div>
                         </div>
-                        <button className="register__submit-button" type="submit" >Зарегистрироваться</button>
+                        <button className={`register__submit-button${!isValid ? ' register__submit-button_disabled' : ''}`} type="submit" >Зарегистрироваться</button>
                     </form>
                     <p className="register__link-text">Уже зарегистрированы? <Link to="/sign-in" className="register__link">Войти</Link></p>
                 </div>

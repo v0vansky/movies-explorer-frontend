@@ -10,100 +10,106 @@ class MainApi {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getInitialCards(){
-    const jwt = localStorage.getItem('jwt');
-    return fetch(`${this._url}/cards`, {
+  register(name, email, password) {
+    return fetch(`${this._url}/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    }).then((res) => this._checkResponse(res));
+  }
+
+  signin(email, password) {
+    return fetch(`${this._url}/signin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ password, email }),
+    }).then((res) => this._checkResponse(res));
+  }
+
+  checkToken(jwt) {
+    return fetch(`${this._url}/users/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+    }).then((res) => this._checkResponse(res));
+  }
+
+  getMovies() {
+    const jwt = localStorage.getItem("jwt");
+    return fetch(`${this._url}/movies`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
       },
-    })
-    .then((res) => this._checkResponse(res));
+    }).then((res) => this._checkResponse(res));
   }
 
-  postCard(data) {
-    const jwt = localStorage.getItem('jwt');
-    return fetch(`${this._url}/cards`, {
+  saveMovie(data) {
+    const jwt = localStorage.getItem("jwt");
+    return fetch(`${this._url}/movies`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: data.name,
-        link: data.link
+        country: data.country,
+        director: data.director,
+        duration: data.duration,
+        year: data.year,
+        description: data.description,
+        image: 'https://api.nomoreparties.co' + data.image.url,
+        trailerLink: data.trailerLink,
+        thumbnail: 'https://api.nomoreparties.co' + data.image.formats.thumbnail.url,
+        movieId: data.id,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
       }),
-    })
-    .then((res) => this._checkResponse(res));
+    }).then((res) => this._checkResponse(res));
   }
 
-  deleteCard(cardId) {
-    const jwt = localStorage.getItem('jwt');
-    return fetch(`${this._url}/cards/${cardId}`, {
+  deleteMovie(movieId) {
+    const jwt = localStorage.getItem("jwt");
+    return fetch(`${this._url}/movies/${movieId}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
       },
-    })
-    .then((res) => this._checkResponse(res));
-  }
-
-  changeLikeCardStatus(cardId, isLiked) {
-    const jwt = localStorage.getItem('jwt');
-    return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: isLiked ? "PUT" : "DELETE",
-      headers: {
-        authorization: `Bearer ${jwt}`,
-        "Content-Type": "application/json",
-      },
-    })
-    .then((res) => this._checkResponse(res));
+    }).then((res) => this._checkResponse(res));
   }
 
   getUserInfo() {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
     return fetch(`${this._url}/users/me`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
       },
-    })
-    .then((res) => this._checkResponse(res));
+    }).then((res) => this._checkResponse(res));
   }
 
-  patchUserInfo(data) {
-    const jwt = localStorage.getItem('jwt');
+  patchUserInfo(name, email) {
+    const jwt = localStorage.getItem("jwt");
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: {
         authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name: data.name,
-        about: data.about
-      }),
-    })
-    .then((res) => this._checkResponse(res));
-  }
-
-  patchAvatar(data) {
-    const jwt = localStorage.getItem('jwt');
-    return fetch(`${this._url}/users/me/avatar`, {
-      method: "PATCH",
-      headers: {
-        authorization: `Bearer ${jwt}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ avatar: data.avatar }),
-    })
-    .then((res) => this._checkResponse(res));
+      body: JSON.stringify({ name, email }),
+    }).then((res) => this._checkResponse(res));
   }
 }
 
 export const mainApi = new MainApi({
-  url: "https://api.mesto.vovansky.nomoreparties.sbs",
-})
+  url: "https://api.vsmovies.nomoredomains.xyz",
+});

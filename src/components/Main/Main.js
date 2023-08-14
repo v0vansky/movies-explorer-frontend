@@ -7,15 +7,20 @@ import AboutProject from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import Footer from '../Footer/Footer';
+import Navigation from '../Navigation/Navigation';
 
-function Main() {
+function Main({ loggedIn }) {
     return (
         <>
             <Header>
-                <nav className='header__menu'>
-                    <Link to="/sign-up" className="header__register">Регистрация</Link>
-                    <Link to="/sign-in" className="header__login">Войти</Link>
-                </nav>
+                { loggedIn ? (
+                    <Navigation />
+                ) : (
+                    <nav className='header__menu'>
+                        <Link to="/sign-up" className="header__register">Регистрация</Link>
+                        <Link to="/sign-in" className="header__login">Войти</Link>
+                    </nav>
+                )}
             </Header>
             <main>
                 <Promo />

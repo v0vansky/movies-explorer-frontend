@@ -1,35 +1,92 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import './MoviesCardList.css';
 
+import Preloader from '../Preloader/Preloader';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import { movie } from '../../constants/movie-example';
 
-function MoviesCardList({ savedPage }) {
-    const [movies, setMovies] = useState([]);
+function MoviesCardList({
+    isSavedMovies,
+    movies,
+    isLoading,
+    isReqErr,
+    isNotFound,
+    onMovieSave,
+    userMovies,
+    onMovieDelete
+}) {
+    const [shownMovies, setShownMovies] = React.useState(0);
 
-    useEffect(() => {
-        if (savedPage) {
-            setMovies([{ ...movie, saved: true }]);
-        } else {
-            setMovies([movie, movie, movie, { ...movie, saved: true }, movie, movie, movie, movie, movie, movie, movie, movie]);
+    function showLimit() {
+        const display = window.innerWidth;
+        if (display > 1024) {
+            setShownMovies(12);
+        } else if (display > 800) {
+            setShownMovies(8);
+        } else if (display < 800) {
+            setShownMovies(5);
         }
-    }, [savedPage]);
+    }
+
+    React.useEffect(() => {
+        showLimit();
+    }, []);
+    
+    React.useEffect(() => {
+        setTimeout(() => {
+          window.addEventListener('resize', showLimit);
+        }, 500);
+    });
+
+
+    function showMore() {
+        const display = window.innerWidth;
+        if (display > 1024) {
+            setShownMovies(shownMovies + 6);
+        } else if (display > 800) {
+            setShownMovies(shownMovies + 4);
+        }
+        else if (display < 800) {
+            setShownMovies(shownMovies + 2);
+        }
+    }
+
+    function getSavedMovieCard(userMovies, movie) {
+        return userMovies.find((userMovie) => userMovie.movieId === movie.id);
+    }
+
     return (
         <section className='movies'>
-            <ul className='movies__list'>
-                {movies.map((movie, index) => (
-                    <MoviesCard
-                        key={index}
-                        savedPage={savedPage}
-                        name={movie.name}
-                        duration={movie.duration}
-                        image={movie.image}
-                        saved={movie.saved}
-                    />
-                ))}
-            </ul>
-            {!savedPage && (
-                <button type='button' className='movies__button'>Ещё</button>
+            {isLoading && <Preloader />}
+            {movies.length > 0 ? (
+                <ul className='movies__list'>
+                    {isSavedMovies ? (
+                        movies.map((movie) => (
+                            <MoviesCard
+                                key={isSavedMovies ? movie._id : movie.id}
+                                userMovies={userMovies}
+                                movie={movie}
+                                isSavedMovies={isSavedMovies}
+                                onMovieSave={onMovieSave}
+                                onMovieDelete={onMovieDelete}
+                                saved={getSavedMovieCard(userMovies, movie)}
+                            />
+                        ))) : (movies.slice(0, shownMovies).map((movie) => (
+                            <MoviesCard
+                                key={isSavedMovies ? movie._id : movie.id}
+                                userMovies={userMovies}
+                                movie={movie}
+                                isSavedMovies={isSavedMovies}
+                                onMovieSave={onMovieSave}
+                                onMovieDelete={onMovieDelete}
+                                saved={getSavedMovieCard(userMovies, movie)}
+                            />
+                        )))}
+                </ul>
+            ) : (
+                isNotFound && !isLoading && <p className='movies__message'>По вашему запросу ничего не найдено</p>
+            )}
+            {movies.length > shownMovies && (
+                <button type='button' className='movies__button' onClick={showMore}>Ещё</button>
             )}
         </section>
     );
