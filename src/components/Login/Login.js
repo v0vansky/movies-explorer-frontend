@@ -1,13 +1,13 @@
 import React from "react";
 import '../Register/Register.css';
 import { Link } from "react-router-dom";
-import { EMAIL_REGEX } from "../../utils/constants";
+import { validate } from "react-email-validator";
 
 function Login(props) {
-    const [values, setValues] = React.useState({});
+    const [values, setValues] = React.useState({ email: '' });
     const [errors, setErrors] = React.useState({});
     const [isValid, setIsValid] = React.useState(false);
-    const [emailTest, setEmailTest] = React.useState(false);
+    const [emailTest, setEmailTest] = React.useState(true);
 
     const handleChange = (event) => {
         const target = event.target;
@@ -15,22 +15,28 @@ function Login(props) {
         const value = target.value;
         setValues({...values, [name]: value});
         setErrors({...errors, [name]: target.validationMessage });
-        if (setEmailTest(!EMAIL_REGEX.test(values.email))) {
-            setIsValid(false);
-        } else {
-            setIsValid(target.closest("form").checkValidity());
-        }
+        setIsValid(target.closest("form").checkValidity());
     };
+
+    React.useEffect(() => {
+        if (!validate(values.email) && (values.email.length > 0)) {
+            setIsValid(false);
+            setEmailTest(false);
+        } else if ((values.email.length === 0) || (validate(values.email))) {
+            setEmailTest(true);
+        }
+    }, [values.email]);
 
     const resetForm = React.useCallback(
         (newValues = {}, newErrors = {}, newIsValid = false) => {
             setValues(newValues);
             setErrors(newErrors);
             setIsValid(newIsValid);
+            setEmailTest(true);
         },
         [setValues, setErrors, setIsValid]
     );
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         props.onLogin(values.email, values.password);
@@ -48,14 +54,14 @@ function Login(props) {
                             <label className="register__input-label" htmlFor="email">E-mail</label>
                             <div className="register__input-container">
                                 <input
-                                    className={`register__input${errors.email || emailTest ? ' register__input_invalid' : ''}`}
+                                    className={`register__input${errors.email || !emailTest ? ' register__input_invalid' : ''}`}
                                     value={values.email || ""}
                                     onChange={handleChange}
                                     name="email"
                                     type="email"
                                     required
                                     autoComplete="off" />
-                                    <span className="register__error">{emailTest ? 'Введите корректный E-Mail' : errors.email}</span>
+                                    <span className="register__error">{!emailTest ? 'Введите корректный E-Mail' : errors.email}</span>
                             </div>
                             <label className="register__input-label" htmlFor="password">Пароль</label>
                             <div className="register__input-container">

@@ -6,7 +6,9 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import {
     SHOW_ON_DESKTOP,
     SHOW_ON_MOBILE,
-    SHOW_ON_TABLET
+    SHOW_ON_TABLET,
+    DESKTOP_POINT,
+    TABLET_POINT
 } from '../../utils/constants';
 
 function MoviesCardList({
@@ -23,11 +25,11 @@ function MoviesCardList({
 
     function showLimit() {
         const display = window.innerWidth;
-        if (display > 1150) {
+        if (display > DESKTOP_POINT) {
             setShownMovies(12);
-        } else if (display > 700) {
+        } else if (display > TABLET_POINT) {
             setShownMovies(8);
-        } else if (display <= 700) {
+        } else if (display <= TABLET_POINT) {
             setShownMovies(5);
         }
     }
@@ -45,12 +47,12 @@ function MoviesCardList({
 
     function showMore() {
         const display = window.innerWidth;
-        if (display > 1150) {
+        if (display > DESKTOP_POINT) {
             setShownMovies(shownMovies + SHOW_ON_DESKTOP);
-        } else if (display > 700) {
+        } else if (display > TABLET_POINT) {
             setShownMovies(shownMovies + SHOW_ON_TABLET);
         }
-        else if (display <= 700) {
+        else if (display <= TABLET_POINT) {
             setShownMovies(shownMovies + SHOW_ON_MOBILE);
         }
     }

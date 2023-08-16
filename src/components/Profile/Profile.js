@@ -1,11 +1,10 @@
 import React from "react";
 import './Profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { validate } from "react-email-validator";
 
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
-import { EMAIL_REGEX } from "../../utils/constants";
-
 
 function Profile(props) {
     const currentUser = React.useContext(CurrentUserContext);
@@ -13,7 +12,7 @@ function Profile(props) {
     const [errors, setErrors] = React.useState({});
     const [isValid, setIsValid] = React.useState(false);
     const [isEditing, setIsEditing] = React.useState(false);
-    const [emailTest, setEmailTest] = React.useState(false);
+    const [emailTest, setEmailTest] = React.useState(true);
 
     const handleChange = (event) => {
         const target = event.target;
@@ -21,14 +20,19 @@ function Profile(props) {
         const value = target.value;
         setValues({...values, [name]: value});
         setErrors({...errors, [name]: target.validationMessage });
-        if (values.name === currentUser.name && values.email === currentUser.email) {
-            setIsValid(false);
-        } else if (setEmailTest(!EMAIL_REGEX.test(values.email))) {
-            setIsValid(false);
-        } else {
-            setIsValid(target.closest("form").checkValidity());
-        }
+        setIsValid(target.closest("form").checkValidity());
     };
+
+    React.useEffect(() => {
+        if (!validate(values.email)) {
+            setIsValid(false);
+            setEmailTest(false);
+        } else if ((values.name === currentUser.name) && (values.email === currentUser.email)) {
+            setEmailTest(true);
+            setIsValid(false);
+        }
+        //eslint-disable-next-line
+    }, [values]);
 
     const resetValues = () => {
         setValues({ name: currentUser.name, email: currentUser.email })
@@ -78,7 +82,7 @@ function Profile(props) {
                         <div className="profile__container">
                             <label className="profile__text" htmlFor="email">E-mail</label>
                             <input
-                                className={`profile__input${errors.email || emailTest ? ' profile__input_invalid' : ''}`}
+                                className={`profile__input${errors.email || !emailTest ? ' profile__input_invalid' : ''}`}
                                 value={values.email || ''}
                                 onChange={handleChange}
                                 name="email"
@@ -87,7 +91,7 @@ function Profile(props) {
                                 disabled={!isEditing}
                                 required
                                 autoComplete="off" />
-                            <span className="profile__error">{emailTest ? 'Введите корректный E-Mail' : errors.email}</span>
+                            <span className="profile__error">{!emailTest ? 'Введите корректный E-Mail' : errors.email}</span>
                         </div>
                     </div>
                     {isEditing ? (

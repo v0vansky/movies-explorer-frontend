@@ -13,12 +13,16 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Preloader from '../Preloader/Preloader';
+import InfoTooltip from '../InfoToolTip/InfoToolTip';
 
 function App() {
     const [isLoading, setIsLoading] = React.useState(true);
     const [currentUser, setCurrentUser] = React.useState({});
     const [loggedIn, setLoggedIn] = React.useState(false);
     const [userMovies, setUserMovies] = React.useState({});
+    const [isSuccess, setIsSuccess] = React.useState();
+    const [isInfoToolTipOpen, setIsInfoToolTipOpen] = React.useState(false);
+    const [infoMessage, setInfoMessage] = React.useState('');
     const navigate = useNavigate();
 
 
@@ -32,6 +36,9 @@ function App() {
                 })
                 .catch((err) => {
                     console.log(err);
+                    setIsSuccess(false);
+                    setInfoMessage('Что-то пошло не так.');
+                    setIsInfoToolTipOpen(true);
                 }).finally(() => {
                     setIsLoading(false);
                 })
@@ -52,21 +59,47 @@ function App() {
             }).catch((err) => {
                 console.log(err);
                 setIsLoading(false);
+                setIsSuccess(false);
+                setInfoMessage('Что-то пошло не так.');
+                setIsInfoToolTipOpen(true);
             })
         } else {
             setIsLoading(false);
         }
     }, []);
 
+    React.useEffect(() => {
+        function closeByEsc(evt) {
+            if (evt.key === "Escape") {
+                closeInfoTooltip()
+            }
+        }
+        if (isInfoToolTipOpen) {
+            document.addEventListener("keydown", closeByEsc)
+            return () => {
+                document.removeEventListener("keydown", closeByEsc)
+            }
+        }
+    }, [isInfoToolTipOpen]);
+
+    function closeInfoTooltip() {
+        setIsInfoToolTipOpen(false);
+    }
+
     function handleRegister(name, email, password) {
         setIsLoading(true);
         mainApi.register(name, email, password)
         .then((res) => {
             handleLogin(email, password)
+            setIsSuccess(true);
+            setInfoMessage('Вы успешно зарегистрировались!');
+            setIsInfoToolTipOpen(true);
         })
         .catch((err) => {
             console.log(err);
             setIsLoading(false);
+            setInfoMessage('Что-то пошло не так.');
+            setIsInfoToolTipOpen(true);
         })
     }
 
@@ -81,6 +114,9 @@ function App() {
         .catch((err) => {
             console.log(err);
             setIsLoading(false);
+            setIsSuccess(false);
+            setInfoMessage('Что-то пошло не так.');
+            setIsInfoToolTipOpen(true);
         })
     }
 
@@ -89,9 +125,15 @@ function App() {
         mainApi.patchUserInfo(name, email)
         .then((data) => {
             setCurrentUser(data);
+            setIsSuccess(true);
+            setInfoMessage('Ваши данные обновлены.');
+            setIsInfoToolTipOpen(true);
         })
         .catch((err) => {
             console.log(err);
+            setIsSuccess(false);
+            setInfoMessage('Что-то пошло не так.');
+            setIsInfoToolTipOpen(true);
         }).finally(() => {
             setIsLoading(false);
         })
@@ -106,6 +148,9 @@ function App() {
         localStorage.removeItem('allMovies');
         setLoggedIn(false);
         navigate("/", { replace: true });
+        setIsSuccess(true);
+        setInfoMessage('Вы вышли из системы.');
+        setIsInfoToolTipOpen(true);
     }
 
     function handleMovieSave(movie) {
@@ -188,6 +233,7 @@ function App() {
                 } />
             </Routes>
             )}
+            <InfoTooltip isOpen={isInfoToolTipOpen} isSuccess={isSuccess} message={infoMessage} onClose={closeInfoTooltip} />
         </CurrentUserContext.Provider>
     );
 }
