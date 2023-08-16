@@ -39,7 +39,6 @@ function Movies({ isSavedMovies, userMovies, onMovieSave, onMovieDelete }) {
     }
 
     function onSearchMovies(query) {
-        setIsLoading(true);
         localStorage.setItem("movieSearch", query);
         localStorage.setItem("shortMovies", isShorts);
 
@@ -61,7 +60,7 @@ function Movies({ isSavedMovies, userMovies, onMovieSave, onMovieDelete }) {
                     setIsLoading(false);
                 });
         }
-        setIsLoading(false);
+
     }
 
     React.useEffect(() => {

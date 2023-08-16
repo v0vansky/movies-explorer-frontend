@@ -107,7 +107,7 @@
 
 .profile__submit-button {
     width: 100%;
-    margin-bottom: 70px;
+    margin-bottom: 10px;
     border: none;
     margin-top: auto;
     padding: 14px;
@@ -181,9 +181,6 @@
     .profile__logout-button {
         margin-bottom: 26.1vh;
     }
-    .profile__submit-button {
-        margin-bottom: 26.4vh;
-    }
 }
 
 @media screen and (max-width: 440px) {
@@ -214,7 +211,6 @@
     }
     .profile__submit-button {
         font-size: 12px;
-        margin-bottom: 41px;
         padding: 15px;
     }
 }

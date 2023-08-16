@@ -21,14 +21,6 @@ function SavedMovies({ isSavedMovies, userMovies, onMovieDelete }) {
     }
 
     React.useEffect(() => {
-        if (localStorage.getItem("shortMovies") === "true") {
-            setIsShorts(true);
-        } else {
-            setIsShorts(false);
-        }
-    }, []);
-
-    React.useEffect(() => {
         const moviesList = filterMovies(userMovies, searchQuery);
         setFilteredMovies(isShorts ? filterDuration(moviesList) : moviesList);
     }, [userMovies, isShorts, searchQuery]);
@@ -51,7 +43,6 @@ function SavedMovies({ isSavedMovies, userMovies, onMovieDelete }) {
                 isSavedMovies={isSavedMovies}
                 onSearch={onSearchMovies}
                 onFilterShorts={handleFilterShorts}
-                isShorts={isShorts}
             />
             <MoviesCardList
                 userMovies={userMovies}

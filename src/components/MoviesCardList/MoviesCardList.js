@@ -3,6 +3,11 @@ import './MoviesCardList.css';
 
 import Preloader from '../Preloader/Preloader';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import {
+    SHOW_ON_DESKTOP,
+    SHOW_ON_MOBILE,
+    SHOW_ON_TABLET
+} from '../../utils/constants';
 
 function MoviesCardList({
     isSavedMovies,
@@ -18,11 +23,11 @@ function MoviesCardList({
 
     function showLimit() {
         const display = window.innerWidth;
-        if (display > 1024) {
+        if (display > 1150) {
             setShownMovies(12);
-        } else if (display > 800) {
+        } else if (display > 700) {
             setShownMovies(8);
-        } else if (display < 800) {
+        } else if (display <= 700) {
             setShownMovies(5);
         }
     }
@@ -40,13 +45,13 @@ function MoviesCardList({
 
     function showMore() {
         const display = window.innerWidth;
-        if (display > 1024) {
-            setShownMovies(shownMovies + 6);
-        } else if (display > 800) {
-            setShownMovies(shownMovies + 4);
+        if (display > 1150) {
+            setShownMovies(shownMovies + SHOW_ON_DESKTOP);
+        } else if (display > 700) {
+            setShownMovies(shownMovies + SHOW_ON_TABLET);
         }
-        else if (display < 800) {
-            setShownMovies(shownMovies + 2);
+        else if (display <= 700) {
+            setShownMovies(shownMovies + SHOW_ON_MOBILE);
         }
     }
 
@@ -56,7 +61,7 @@ function MoviesCardList({
 
     return (
         <section className='movies'>
-            {isLoading && <Preloader />}
+            {isLoading && <Preloader isGlobal={false} />}
             {movies.length > 0 ? (
                 <ul className='movies__list'>
                     {isSavedMovies ? (

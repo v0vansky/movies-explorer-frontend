@@ -1,5 +1,6 @@
 import React from 'react';
 import './MoviesCard.css';
+import { durationConverter } from '../../utils/utils';
 
 function MoviesCard({
   userMovies,
@@ -27,7 +28,7 @@ function MoviesCard({
     <li className='movies__card'>
       <div className='movies__card-info'>
         <h2 className='movies__card-title'>{movie.nameRU}</h2>
-        <p className='movies__card-duration'>{`${movie.duration} мин`}</p>
+        <p className='movies__card-duration'>{durationConverter(movie.duration)}</p>
       </div>
       <a href={movie.trailerLink} target="_blank" rel="noreferrer">
         <img

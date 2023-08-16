@@ -1,6 +1,7 @@
 import React from "react";
 import './Register.css';
 import { Link } from "react-router-dom";
+import { EMAIL_REGEX } from "../../utils/constants";
 
 function Register(props) {
     const [values, setValues] = React.useState({});
@@ -12,8 +13,12 @@ function Register(props) {
         const name = target.name;
         const value = target.value;
         setValues({...values, [name]: value});
-        setErrors({...errors, [name]: target.validationMessage });
         setIsValid(target.closest("form").checkValidity());
+        if (!EMAIL_REGEX.test(values.email)) {
+            setErrors({...errors, email: 'Введите корректный E-Mail' })
+            setIsValid(false);
+        }
+        setErrors({...errors, [name]: target.validationMessage });
     };
 
     const resetForm = React.useCallback(
@@ -39,7 +44,7 @@ function Register(props) {
                     <h1 className='register__title'>Добро пожаловать!</h1>
                     <form className="register__form" onSubmit={handleSubmit}>
                         <div className="register__inputs">
-                            <label className="register__input-label" for="name">Имя</label>
+                            <label className="register__input-label" htmlFor="name">Имя</label>
                             <div className="register__input-container">
                                 <input
                                     className={`register__input${errors.name ? ' register__input_invalid' : ''}`}
@@ -54,7 +59,7 @@ function Register(props) {
                                     autoComplete="off" />
                                     <span className="register__error">{errors.name}</span>
                             </div>
-                            <label className="register__input-label" for="email">E-mail</label>
+                            <label className="register__input-label" htmlFor="email">E-mail</label>
                             <div className="register__input-container">
                                 <input
                                     className={`register__input${errors.email ? ' register__input_invalid' : ''}`}
@@ -67,7 +72,7 @@ function Register(props) {
                                     autoComplete="off" />
                                     <span className="register__error">{errors.email}</span>
                             </div>
-                            <label className="register__input-label" for="password">Пароль</label>
+                            <label className="register__input-label" htmlFor="password">Пароль</label>
                             <div className="register__input-container">
                                 <input
                                     className={`register__input${errors.password ? ' register__input_invalid' : ''}`}

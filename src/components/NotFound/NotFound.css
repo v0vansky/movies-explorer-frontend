@@ -39,6 +39,8 @@
     line-height: normal;
 }
 .not-found__link {
+    border: none;
+    background: none;
     display: flex;
     margin: 0;
     position: absolute;
@@ -51,7 +53,7 @@
     line-height: normal;
     text-decoration: none;
     transition: .2s ease-out;
-    bottom: -184px;
+    bottom: -186px;
 }
 .not-found__link:hover {
     cursor: pointer;

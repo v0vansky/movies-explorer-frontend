@@ -21,9 +21,10 @@ function App() {
     const [userMovies, setUserMovies] = React.useState({});
     const navigate = useNavigate();
 
+
     React.useEffect(() => {
         if (loggedIn) {
-            setIsLoading(true);
+            
             Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
                 .then(([userData, userMovies]) => {
                     setCurrentUser(userData);
@@ -34,20 +35,27 @@ function App() {
                 }).finally(() => {
                     setIsLoading(false);
                 })
+        } else {
+            setIsLoading(false);
         }
     }, [loggedIn]);
 
     React.useEffect(() => {
+        setIsLoading(true);
         const jwt = localStorage.getItem('jwt');
         if (jwt) {
+            
             mainApi.checkToken(jwt).then(res => {
                 if (res) {
                     setLoggedIn(true);
                 }
             }).catch((err) => {
                 console.log(err);
+                setIsLoading(false);
             })
-        } setIsLoading(false)
+        } else {
+            setIsLoading(false);
+        }
     }, []);
 
     function handleRegister(name, email, password) {
@@ -90,38 +98,43 @@ function App() {
     }
 
     function handleLogout() {
-        setLoggedIn(false);
+        setIsLoading(true);
         localStorage.removeItem("jwt");
         localStorage.removeItem('movies');
         localStorage.removeItem('movieSearch');
         localStorage.removeItem('shortMovies');
         localStorage.removeItem('allMovies');
+        setLoggedIn(false);
         navigate("/", { replace: true });
     }
 
     function handleMovieSave(movie) {
         mainApi.saveMovie(movie)
-          .then((newMovie) => {
-            setUserMovies([newMovie, ...userMovies]);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
+            .then((newMovie) => {
+                setUserMovies([newMovie, ...userMovies]);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
     
-      function handleMovieDelete(movie) {
+    function handleMovieDelete(movie) {
         mainApi.deleteMovie(movie._id)
-          .then(() => {
-            setUserMovies((userMovies) => userMovies.filter((item) => item._id !== movie._id));
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
+            .then(() => {
+                setUserMovies((userMovies) => userMovies.filter((item) => item._id !== movie._id));
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+    
+    function goBack() {
+        navigate(-1);
+    }
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
-            {isLoading ? (<Preloader />) : (
+            {isLoading ? (<Preloader isGlobal={true} />) : (
             <Routes>
                 <Route path="/" element={
                     <Main loggedIn={loggedIn} />
@@ -168,7 +181,7 @@ function App() {
                         <Navigate to="/" replace />
                     )} />
                 <Route path="/404" element={
-                    <NotFound />
+                    <NotFound goBack={goBack} />
                 } />
                 <Route path="*" element={
                     <Navigate to="/404" replace />

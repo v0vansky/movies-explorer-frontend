@@ -1,6 +1,7 @@
 import React from "react";
 import '../Register/Register.css';
 import { Link } from "react-router-dom";
+import { EMAIL_REGEX } from "../../utils/constants";
 
 function Login(props) {
     const [values, setValues] = React.useState({});
@@ -14,6 +15,10 @@ function Login(props) {
         setValues({...values, [name]: value});
         setErrors({...errors, [name]: target.validationMessage });
         setIsValid(target.closest("form").checkValidity());
+        if (!EMAIL_REGEX.test(values.email)) {
+            setErrors({...errors, email: 'Введите корректный E-Mail' })
+            setIsValid(false);
+        }
     };
 
     const resetForm = React.useCallback(
@@ -39,7 +44,7 @@ function Login(props) {
                     <h1 className='register__title'>Рады видеть!</h1>
                     <form className="register__form" onSubmit={handleSubmit}>
                         <div className="register__inputs">
-                            <label className="register__input-label">E-mail</label>
+                            <label className="register__input-label" htmlFor="email">E-mail</label>
                             <div className="register__input-container">
                                 <input
                                     className={`register__input${errors.email ? ' register__input_invalid' : ''}`}
@@ -51,7 +56,7 @@ function Login(props) {
                                     autoComplete="off" />
                                     <span className="register__error">{errors.email}</span>
                             </div>
-                            <label className="register__input-label">Пароль</label>
+                            <label className="register__input-label" htmlFor="password">Пароль</label>
                             <div className="register__input-container">
                                 <input
                                     className={`register__input${errors.password ? ' register__input_invalid' : ''}`}
