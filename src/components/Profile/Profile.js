@@ -13,6 +13,7 @@ function Profile(props) {
     const [errors, setErrors] = React.useState({});
     const [isValid, setIsValid] = React.useState(false);
     const [isEditing, setIsEditing] = React.useState(false);
+    const [emailTest, setEmailTest] = React.useState(false);
 
     const handleChange = (event) => {
         const target = event.target;
@@ -20,18 +21,19 @@ function Profile(props) {
         const value = target.value;
         setValues({...values, [name]: value});
         setErrors({...errors, [name]: target.validationMessage });
-        setIsValid(target.closest("form").checkValidity());
         if (values.name === currentUser.name && values.email === currentUser.email) {
             setIsValid(false);
-        }
-        if (!EMAIL_REGEX.test(values.email)) {
+        } else if (setEmailTest(!EMAIL_REGEX.test(values.email))) {
             setIsValid(false);
+        } else {
+            setIsValid(target.closest("form").checkValidity());
         }
     };
 
     const resetValues = () => {
         setValues({ name: currentUser.name, email: currentUser.email })
         setErrors({})
+        setEmailTest(false)
         setIsValid(false)
     }
 
@@ -76,7 +78,7 @@ function Profile(props) {
                         <div className="profile__container">
                             <label className="profile__text" htmlFor="email">E-mail</label>
                             <input
-                                className={`profile__input${(errors.email || !EMAIL_REGEX.test(values.email)) ? ' profile__input_invalid' : ''}`}
+                                className={`profile__input${errors.email || emailTest ? ' profile__input_invalid' : ''}`}
                                 value={values.email || ''}
                                 onChange={handleChange}
                                 name="email"
@@ -85,7 +87,7 @@ function Profile(props) {
                                 disabled={!isEditing}
                                 required
                                 autoComplete="off" />
-                            <span className="profile__error">{errors.email}</span>
+                            <span className="profile__error">{emailTest ? 'Введите корректный E-Mail' : errors.email}</span>
                         </div>
                     </div>
                     {isEditing ? (

@@ -7,18 +7,19 @@ function Register(props) {
     const [values, setValues] = React.useState({});
     const [errors, setErrors] = React.useState({});
     const [isValid, setIsValid] = React.useState(false);
+    const [emailTest, setEmailTest] = React.useState(false);
 
     const handleChange = (event) => {
         const target = event.target;
         const name = target.name;
         const value = target.value;
         setValues({...values, [name]: value});
-        setIsValid(target.closest("form").checkValidity());
-        if (!EMAIL_REGEX.test(values.email)) {
-            setErrors({...errors, email: 'Введите корректный E-Mail' })
-            setIsValid(false);
-        }
         setErrors({...errors, [name]: target.validationMessage });
+        if (setEmailTest(!EMAIL_REGEX.test(values.email))) {
+            setIsValid(false);
+        } else {
+            setIsValid(target.closest("form").checkValidity());
+        }
     };
 
     const resetForm = React.useCallback(
@@ -62,7 +63,7 @@ function Register(props) {
                             <label className="register__input-label" htmlFor="email">E-mail</label>
                             <div className="register__input-container">
                                 <input
-                                    className={`register__input${errors.email ? ' register__input_invalid' : ''}`}
+                                    className={`register__input${errors.email || emailTest ? ' register__input_invalid' : ''}`}
                                     value={values.email || ""}
                                     onChange={handleChange}
                                     name="email"
@@ -70,7 +71,7 @@ function Register(props) {
                                     type="email"
                                     required
                                     autoComplete="off" />
-                                    <span className="register__error">{errors.email}</span>
+                                    <span className="register__error">{emailTest ? 'Введите корректный E-Mail' : errors.email}</span>
                             </div>
                             <label className="register__input-label" htmlFor="password">Пароль</label>
                             <div className="register__input-container">
