@@ -190,7 +190,8 @@ function App() {
                         loggedIn={loggedIn}
                         isSavedMovies={false}
                         userMovies={userMovies}
-                        /* onSearch={handleSearch} */
+                        onError={setIsInfoToolTipOpen}
+                        errorMessage={setInfoMessage}
                         onMovieDelete={handleMovieDelete}
                         onMovieSave={handleMovieSave}
                     />
@@ -201,6 +202,8 @@ function App() {
                         loggedIn={loggedIn}
                         isSavedMovies={true}
                         userMovies={userMovies}
+                        onError={setIsInfoToolTipOpen}
+                        errorMessage={setInfoMessage}
                         onMovieDelete={handleMovieDelete}
                         onMovieSave={handleMovieSave}
                     />

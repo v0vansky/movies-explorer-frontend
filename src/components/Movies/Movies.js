@@ -7,13 +7,11 @@ import SearchForm from "../SearchForm/SearchForm";
 import { moviesApi } from "../../utils/MoviesApi";
 import { filterMovies, filterDuration } from '../../utils/utils';
 
-function Movies({ isSavedMovies, userMovies, onMovieSave, onMovieDelete }) {
+function Movies({ isSavedMovies, userMovies, onMovieSave, onMovieDelete, onError, errorMessage }) {
     const [isLoading, setIsLoading] = React.useState(false);
     const [initialMovies, setInitialMovies] = React.useState([]);
     const [filteredMovies, setFilteredMovies] = React.useState([]);
     const [isShorts, setIsShorts] = React.useState(false);
-
-    const [isReqErr, setIsReqErr] = React.useState(false);
     const [isNotFound, setIsNotFound] = React.useState(false);
 
     function handleFilterMovies(movies, query, short) {
@@ -50,10 +48,10 @@ function Movies({ isSavedMovies, userMovies, onMovieSave, onMovieDelete }) {
             moviesApi.getMovies()
                 .then((cardsData) => {
                     handleFilterMovies(cardsData, query, isShorts);
-                    setIsReqErr(false);
                 })
                     .catch((err) => {
-                    setIsReqErr(true);
+                    onError(true);
+                    errorMessage('При загрузке фильмов с сервера произошла ошибка. Попробуйте еще раз')
                     console.log(err);
                 })
                     .finally(() => {
@@ -112,7 +110,6 @@ function Movies({ isSavedMovies, userMovies, onMovieSave, onMovieDelete }) {
                 movies={filteredMovies}
                 isSavedMovies={isSavedMovies}
                 isLoading={isLoading}
-                isReqErr={isReqErr}
                 isNotFound={isNotFound}
                 onMovieSave={onMovieSave}
                 onMovieDelete={onMovieDelete}

@@ -7,52 +7,55 @@ import {
     SHOW_ON_DESKTOP,
     SHOW_ON_MOBILE,
     SHOW_ON_TABLET,
+    DESKTOP_DEFAULT_CARDS,
+    TABLET_DEFAULT_CARDS,
+    MOBILE_DEFAULT_CARDS,
     DESKTOP_POINT,
     TABLET_POINT
 } from '../../utils/constants';
+import SavedMovies from '../SavedMovies/SavedMovies';
 
 function MoviesCardList({
     isSavedMovies,
     movies,
     isLoading,
-    isReqErr,
     isNotFound,
     onMovieSave,
     userMovies,
     onMovieDelete
 }) {
     const [shownMovies, setShownMovies] = React.useState(0);
+    const [width, setWidth] = React.useState(window.innerWidth);
 
     function showLimit() {
-        const display = window.innerWidth;
-        if (display > DESKTOP_POINT) {
-            setShownMovies(12);
-        } else if (display > TABLET_POINT) {
-            setShownMovies(8);
-        } else if (display <= TABLET_POINT) {
-            setShownMovies(5);
+        if (width > DESKTOP_POINT) {
+            setShownMovies(DESKTOP_DEFAULT_CARDS);
+        } else if (width > TABLET_POINT) {
+            setShownMovies(TABLET_DEFAULT_CARDS);
+        } else if (width <= TABLET_POINT) {
+            setShownMovies(MOBILE_DEFAULT_CARDS);
         }
     }
 
     React.useEffect(() => {
-        showLimit();
+        const handleResizeWindow = () => setWidth(window.innerWidth);
+        window.addEventListener("resize", handleResizeWindow);
+        return () => {
+            window.removeEventListener("resize", handleResizeWindow);
+        };
     }, []);
-    
-    React.useEffect(() => {
-        setTimeout(() => {
-          window.addEventListener('resize', showLimit);
-        }, 500);
-    });
 
+    React.useEffect(() => {
+        showLimit();
+    }, [width]);
 
     function showMore() {
-        const display = window.innerWidth;
-        if (display > DESKTOP_POINT) {
+        if (width > DESKTOP_POINT) {
             setShownMovies(shownMovies + SHOW_ON_DESKTOP);
-        } else if (display > TABLET_POINT) {
+        } else if (width > TABLET_POINT) {
             setShownMovies(shownMovies + SHOW_ON_TABLET);
         }
-        else if (display <= TABLET_POINT) {
+        else if (width <= TABLET_POINT) {
             setShownMovies(shownMovies + SHOW_ON_MOBILE);
         }
     }
@@ -92,7 +95,7 @@ function MoviesCardList({
             ) : (
                 isNotFound && !isLoading && <p className='movies__message'>По вашему запросу ничего не найдено</p>
             )}
-            {movies.length > shownMovies && (
+            {movies.length > shownMovies && !isSavedMovies && (
                 <button type='button' className='movies__button' onClick={showMore}>Ещё</button>
             )}
         </section>
