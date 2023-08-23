@@ -46,7 +46,7 @@ function SavedMovies({ isSavedMovies, userMovies, onMovieDelete }) {
             />
             <MoviesCardList
                 userMovies={userMovies}
-                movies={filteredMovies}
+                moviesData={filteredMovies}
                 isSavedMovies={isSavedMovies}
                 onMovieDelete={onMovieDelete}
                 isNotFound={isNotFound}

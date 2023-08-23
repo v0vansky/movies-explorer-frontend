@@ -58,7 +58,6 @@ function Movies({ isSavedMovies, userMovies, onMovieSave, onMovieDelete, onError
                     setIsLoading(false);
                 });
         }
-
     }
 
     React.useEffect(() => {
@@ -107,7 +106,7 @@ function Movies({ isSavedMovies, userMovies, onMovieSave, onMovieDelete, onError
             />
             <MoviesCardList
                 userMovies={userMovies}
-                movies={filteredMovies}
+                moviesData={filteredMovies}
                 isSavedMovies={isSavedMovies}
                 isLoading={isLoading}
                 isNotFound={isNotFound}

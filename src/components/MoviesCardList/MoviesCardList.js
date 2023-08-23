@@ -13,32 +13,35 @@ import {
     DESKTOP_POINT,
     TABLET_POINT
 } from '../../utils/constants';
-import SavedMovies from '../SavedMovies/SavedMovies';
 
 function MoviesCardList({
     isSavedMovies,
-    movies,
+    moviesData,
     isLoading,
     isNotFound,
     onMovieSave,
     userMovies,
     onMovieDelete
 }) {
+    const [movies, setMovies] = React.useState(moviesData);
     const [shownMovies, setShownMovies] = React.useState(0);
     const [width, setWidth] = React.useState(window.innerWidth);
 
-    function showLimit() {
-        if (width > DESKTOP_POINT) {
-            setShownMovies(DESKTOP_DEFAULT_CARDS);
-        } else if (width > TABLET_POINT) {
-            setShownMovies(TABLET_DEFAULT_CARDS);
-        } else if (width <= TABLET_POINT) {
-            setShownMovies(MOBILE_DEFAULT_CARDS);
-        }
+    function showMovies() {
+            if (width > DESKTOP_POINT) {
+                setShownMovies(DESKTOP_DEFAULT_CARDS);
+            } else if (width > TABLET_POINT) {
+                setShownMovies(TABLET_DEFAULT_CARDS);
+            } else if (width <= TABLET_POINT) {
+                setShownMovies(MOBILE_DEFAULT_CARDS);
+            }
     }
 
     React.useEffect(() => {
-        const handleResizeWindow = () => setWidth(window.innerWidth);
+        const handleResizeWindow = () => {
+            setWidth(window.innerWidth);
+            showMovies();
+        }
         window.addEventListener("resize", handleResizeWindow);
         return () => {
             window.removeEventListener("resize", handleResizeWindow);
@@ -46,16 +49,17 @@ function MoviesCardList({
     }, []);
 
     React.useEffect(() => {
-        showLimit();
-    }, [width]);
+        setMovies(moviesData);
+        setShownMovies(0);
+        showMovies();
+    }, [moviesData]);
 
     function showMore() {
         if (width > DESKTOP_POINT) {
             setShownMovies(shownMovies + SHOW_ON_DESKTOP);
         } else if (width > TABLET_POINT) {
             setShownMovies(shownMovies + SHOW_ON_TABLET);
-        }
-        else if (width <= TABLET_POINT) {
+        } else if (width <= TABLET_POINT) {
             setShownMovies(shownMovies + SHOW_ON_MOBILE);
         }
     }
