@@ -6,7 +6,7 @@ function Footer() {
             <div className='footer__content'>
                 <p className='footer__title'>Учебный проект Яндекс.Практикум х BeatFilm.</p>
                 <ul className='footer__container'>
-                    <li className='footer__text'>© 2020</li>
+                    <li className='footer__text'>© 2023</li>
                     <li className='footer__text'>
                         <a href='https://praktikum.yandex.ru/' className='footer__link' target='_blank' rel='noopener noreferrer'>Яндекс.Практикум</a>
                     </li>
