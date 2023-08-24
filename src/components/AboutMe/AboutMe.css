@@ -60,7 +60,8 @@
 
 .about-me__photo {
     display: flex;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: center;
     border-radius: 11px;
     width: 270px;
     height: 327px;

@@ -5,6 +5,8 @@
 
 **Ссылка на проект: [Movies Explorer](https://vsmovies.nomoredomains.xyz/)**
 
+**Ссылка на [Pull Request](https://github.com/v0vansky/movies-explorer-frontend/pull/2)**
+
 ---
 
 Автор работы: **Владимир Стенин**
