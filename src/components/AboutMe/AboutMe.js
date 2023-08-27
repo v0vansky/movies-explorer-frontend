@@ -1,7 +1,7 @@
 import './AboutMe.css';
 import Describer from '../Describer/Describer';
 import Portfolio from '../Portfolio/Portfolio';
-import Photo from '../../images/02.jpg';
+import Photo from '../../images/stenin.jpg';
 
 function AboutMe() {
     return (
